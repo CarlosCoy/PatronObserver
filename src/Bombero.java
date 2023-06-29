@@ -1,5 +1,5 @@
 
 //Clase Observador
-public interface Observer {
+public interface Bombero {
     void update(String param);
 }

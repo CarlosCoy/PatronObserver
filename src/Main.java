@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -8,52 +7,52 @@ public class Main {
     public static void main(String[] args) {
 
 
-        SofkaU sofkau = new SofkaU();
+        Servidor gestorEmergencias = new Servidor();
 
-        executeGame(sofkau);
+        executeGame(gestorEmergencias);
 
 
     }
 
-    private static void executeGame(SofkaU sofkau) {
+    private static void executeGame(Servidor gestor) {
         Scanner sc = new Scanner(System.in);
         Scanner sc2 = new Scanner(System.in);
 
         System.out.println("" +
-                "1- suscribir sofkiano\n" +
-                "2- desuscribir sofkiano \n" +
-                "3- publicar podcast\n" +
+                "1- Suscribir nuevo bombero\n" +
+                "2- Desuscribir bombero \n" +
+                "3- Notificar emergencia\n" +
                 "8- Salir");
         int menuOption = sc.nextInt();
 
         switch (menuOption){
             case 1:
-                System.out.println("Subscribir sofkiano");
+                System.out.println("Ingrese el nombre del bombero");
                 String nameToBeAdded = sc2.nextLine();
 
-                Sofkiano sofkiano = new Sofkiano(nameToBeAdded);
-                sofkau.addObserver(sofkiano);
+                Notificador sofkiano = new Notificador(nameToBeAdded);
+                gestor.addObserver(sofkiano);
 
-                System.out.println("Sofkiano suscrito.");
-                executeGame(sofkau);
+                System.out.println("Bombero suscrito.");
+                executeGame(gestor);
                 break;
 
             case 2:
-                sofkau.getObservers().forEach(System.out::println);
+                gestor.getObservers().forEach(System.out::println);
 
-                System.out.println("Desuscribir sofkiano");
+                System.out.println("Por favor ingrese el nombre del bombero");
                 String nameToBeRemoved = sc2.nextLine();
 
-                sofkau.removeByName(nameToBeRemoved);
-                System.out.println("Sofkiano desuscrito.");
-                executeGame(sofkau);
+                gestor.removeByName(nameToBeRemoved);
+                System.out.println("Bombero eliminado.");
+                executeGame(gestor);
                 break;
 
             case 3:
-                System.out.println("Publicar Podcast");
-                String link = sc2.nextLine();
-                sofkau.addPodcast(link);
-                executeGame(sofkau);
+                System.out.println("Notificar emergencia" + '\n' + "(Incendio, Terremoto, Accidente, etc)");
+                String emergencia = sc2.nextLine();
+                gestor.addPodcast(emergencia);
+                executeGame(gestor);
                 break;
             case 8:
                 System.out.println("Gracias por utilizar nuestro sistema!");
